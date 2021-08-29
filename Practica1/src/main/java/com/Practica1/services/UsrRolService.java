@@ -23,8 +23,8 @@ public class UsrRolService {
 		return (List<UsrRol>) usrRolRepository.findAll();
 	}
 	
-	public void ingresarNuevoRol(UsrRol objUsrRol) {
-		usrRolRepository.save(objUsrRol);		
+	public UsrRol ingresarNuevoRol(UsrRol objUsrRol) {
+		return usrRolRepository.save(objUsrRol);		
 	}
 	
 	public UsrRol actualizarRol(UsrRol objUsrRol) {

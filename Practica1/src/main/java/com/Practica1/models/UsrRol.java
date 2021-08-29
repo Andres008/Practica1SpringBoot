@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "usr_rol")
 public class UsrRol {
@@ -22,6 +24,7 @@ public class UsrRol {
 	
 	private String observacion;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "usrRol")
 	private List<UsrUsuario> usrUsuarios;
 	
