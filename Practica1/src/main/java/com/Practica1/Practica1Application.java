@@ -20,13 +20,13 @@ public class Practica1Application implements CommandLineRunner {
 	
 	public void run(String... args) throws Exception{
 		
-		//usrRolService.ingresarNuevoRol(new UsrRol(new Long(4), "Ejemplo4", "A", "4"));
+		/*//usrRolService.ingresarNuevoRol(new UsrRol(new Long(4), "Ejemplo4", "A", "4"));
 		//usrRolService.eliminarRol(new UsrRol(new Long(4), "Ejemplo5", "A", "4"));
 		usrRolService.actualizarRol(new UsrRol(new Long(3), "Esta es una modificacion", "A", "4"));
 		usrRolService.obtenerTodosRol().forEach(rol->{
 			
 			System.out.println("Rol existente..:"+rol);
-		});
+		});*/
 	}
 
 }

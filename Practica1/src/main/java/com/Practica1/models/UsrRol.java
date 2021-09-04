@@ -1,92 +1,69 @@
 package com.Practica1.models;
 
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import java.io.Serializable;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.List;
+
+
+/**
+ * The persistent class for the usr_rol database table.
+ * 
+ */
 @Entity
-@Table(name = "usr_rol")
-public class UsrRol {
+@Table(name="usr_rol")
+@NamedQuery(name="UsrRol.findAll", query="SELECT u FROM UsrRol u")
+public class UsrRol implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator( name="USR_ROL_SECUENCIA", sequenceName = "SEQ_USR_ROL", allocationSize = 1 )
-	@GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "USR_ROL_SECUENCIA" )
-	@Column(name = "id_rol")
+	@SequenceGenerator(name="USR_ROL_IDROL_GENERATOR", sequenceName="SEQ_USR_ROL", allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USR_ROL_IDROL_GENERATOR")
+	@Column(name="id_rol")
 	private Long idRol;
-	
-	private String nombre;
-	
+
 	private String estado;
-	
+
+	private String nombre;
+
 	private String observacion;
-	
+
+	//bi-directional many-to-one association to UsrUsuario
 	@JsonIgnore
-	@OneToMany(mappedBy = "usrRol")
+	@OneToMany(mappedBy="usrRol")
 	private List<UsrUsuario> usrUsuarios;
-	
+
 	public UsrRol() {
-		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
-
-	public UsrRol(Long idRol, String nombre, String estado, String observacion) {
-		super();
-		this.idRol = idRol;
-		this.nombre = nombre;
-		this.estado = estado;
-		this.observacion = observacion;
-	}
-
-
-
-
-
-	@Override
-	public String toString() {
-		return "UsrRol [idRol=" + idRol + ", nombre=" + nombre + ", estado=" + estado + ", observacion=" + observacion
-				+ "]";
-	}
-
-
 
 	public Long getIdRol() {
-		return idRol;
+		return this.idRol;
 	}
 
 	public void setIdRol(Long idRol) {
 		this.idRol = idRol;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public String getEstado() {
-		return estado;
+		return this.estado;
 	}
 
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public String getObservacion() {
-		return observacion;
+		return this.observacion;
 	}
 
 	public void setObservacion(String observacion) {
@@ -94,13 +71,25 @@ public class UsrRol {
 	}
 
 	public List<UsrUsuario> getUsrUsuarios() {
-		return usrUsuarios;
+		return this.usrUsuarios;
 	}
 
 	public void setUsrUsuarios(List<UsrUsuario> usrUsuarios) {
 		this.usrUsuarios = usrUsuarios;
 	}
-	
-	
-	
+
+	public UsrUsuario addUsrUsuario(UsrUsuario usrUsuario) {
+		getUsrUsuarios().add(usrUsuario);
+		usrUsuario.setUsrRol(this);
+
+		return usrUsuario;
+	}
+
+	public UsrUsuario removeUsrUsuario(UsrUsuario usrUsuario) {
+		getUsrUsuarios().remove(usrUsuario);
+		usrUsuario.setUsrRol(null);
+
+		return usrUsuario;
+	}
+
 }

@@ -43,6 +43,9 @@ public class UsrUsuarioController {
 	@PostMapping(produces = "application/json")
 	public UsrUsuario guardarRol(@RequestBody @Validated UsrUsuario objUsrUsuario ) throws Exception {
 		try {
+			objUsrUsuario.getUsrUsuarioExperiencias().forEach(experiencia->{
+				experiencia.setUsrUsuario(objUsrUsuario);
+			});
 			return usrUsuarioService.ingresarNuevoUsuario(objUsrUsuario);
 		}catch (Exception e) {
 			logger.info("Error en el consumo del servicio guardar Rol. " + e.getMessage());
